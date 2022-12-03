@@ -1,0 +1,36 @@
+{
+  "name": "vscode-home-assistant-button-card-js",
+  "displayName": "Button-Card JS Highlighting in VSCode",
+  "description": "Syntax Highlighting for Javascript enclosed in triple square brackets for Button Card custom cards",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "js-inline.injection",
+        "path": "./syntaxes/js-inline.json",
+        "injectTo": [
+          "source.home-assistant"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.inline.js": "js"
+        }
+      },
+      {
+        "scopeName": "js-block.injection",
+        "path": "./syntaxes/js-block.json",
+        "injectTo": [
+          "source.home-assistant"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.js": "js"
+        }
+      }
+    ]
+  }
+}

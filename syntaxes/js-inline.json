@@ -1,0 +1,34 @@
+{
+  "scopeName": "js-inline.homeassistant.injection",
+  "injectionSelector": "L:string.quoted.double.homeassistant",
+  "name": "Grammar for Button-Card Javascript expressions surrounded by triple square brackets in quoted strings",
+  "patterns": [
+    {
+      "include": "#js-inline-expression"
+    }
+  ],
+  "repository": {
+    "js-inline-expression": {
+      "comment": "The 'name' is used to undo highlighting as string",
+      "name": "keyword.operator.homeassistant",
+      "begin": "\\[\\[\\[",
+      "end": "\\]\\]\\]",
+      "beginCaptures": {
+        "0": {
+          "name": "constant.character.escape.homeassistant"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "constant.character.escape.homeassistant"
+        }
+      },
+      "contentName": "meta.embedded.inline.js",
+      "patterns": [
+        {
+          "include": "source.js#expression"
+        }
+      ]
+    }
+  }
+}
