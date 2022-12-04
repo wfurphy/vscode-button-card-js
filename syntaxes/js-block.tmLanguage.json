@@ -23,7 +23,7 @@
           "name": "constant.character.escape.homeassistant"
         }
       },
-      "contentName": "meta.embedded.inline.js",
+      "contentName": "meta.embedded.block.js",
       "patterns": [
         {
           "include": "source.js#expression"

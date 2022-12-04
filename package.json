@@ -1,10 +1,10 @@
 {
   "name": "vscode-home-assistant-button-card-js",
-  "displayName": "Button-Card JS Highlighting in VSCode",
-  "description": "Syntax Highlighting for Javascript enclosed in triple square brackets for Button Card custom cards",
-  "version": "0.0.1",
+  "displayName": "Javascript Highlighting for Button-Card Templates in VSCode",
+  "description": "Syntax Highlighting for Javascript code blocks enclosed in triple square brackets [[[ * ]]]. Used by Button-Card Templates for Home Assistant Lovelace Dashboards. This is to be used as an addition to https://github.com/keesschollaart81/vscode-home-assistant as it injects into the `source.home-assistant` YAML replacement language provided by this plugin.",
+  "version": "0.2.0",
   "engines": {
-    "vscode": "^1.73.0"
+    "vscode": "^1.45.1"
   },
   "categories": [
     "Programming Languages"
@@ -12,8 +12,8 @@
   "contributes": {
     "grammars": [
       {
-        "scopeName": "js-inline.injection",
-        "path": "./syntaxes/js-inline.json",
+        "scopeName": "js-inline.homeassistant.injection",
+        "path": "./syntaxes/js-inline.tmLanguage.json",
         "injectTo": [
           "source.home-assistant"
         ],
@@ -22,8 +22,8 @@
         }
       },
       {
-        "scopeName": "js-block.injection",
-        "path": "./syntaxes/js-block.json",
+        "scopeName": "js-block.homeassistant.injection",
+        "path": "./syntaxes/js-block.tmLanguage.json",
         "injectTo": [
           "source.home-assistant"
         ],
@@ -32,12 +32,5 @@
         }
       }
     ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./"
   }
 }
