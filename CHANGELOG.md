@@ -1,8 +1,6 @@
-# Change Log
+# Button Card JS for VSCode Change Log
 
-All notable changes to the "vscode-home-assistant-button-card-js" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to the `vscode-button-card-js` extension will be documented in this file. Using [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
@@ -17,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - JS Tripple Square Brackets Injection Grammar for YAML language.
+
+## [0.2.1] - 13th January 2023
+
+- Prepare for VSCode Marketplace
