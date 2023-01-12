@@ -1,7 +1,15 @@
 {
   "name": "vscode-button-card-js",
   "displayName": "Button Card Javascript Syntax Highlighting in VSCode",
-  "description": "Syntax highlighting of Javascript code blocks in YAML which are enclosed by triple square brackets (`[[[ ... ]]]`). Used when configuring the advanced _javascript templates_ properties of [Button-Card](https://github.com/custom-cards/button-card) cards for Home Assistant Lovelace dashboards.",
+  "description": "Syntax highlighting of Javascript code blocks in YAML which are enclosed by triple square brackets. Used when configuring the advanced javascript templates properties of Button-Card cards for Home Assistant Lovelace dashboards.",
+  "homepage": "https://github.com/wfurphy/vscode-button-card-js",
+  "publisher": "wfurphy",
+  "license": "MIT",
+  "version": "0.2.2",
+  "author": {
+    "name": "Will Furphy",
+    "url": "https://github.com/wfurphy"
+  },
   "categories": [
     "Programming Languages"
   ],
@@ -20,11 +28,6 @@
     "color": "#55c1f1",
     "theme": "dark"
   },
-  "homepage": "https://github.com/wfurphy/vscode-button-card-js",
-  "author": {
-    "name": "Will Furphy",
-    "url": "https://github.com/wfurphy"
-  },
   "bugs": {
     "url": "https://github.com/wfurphy/vscode-button-card-js/issues"
   },
@@ -32,8 +35,6 @@
     "type": "git",
     "url": "https://github.com/wfurphy/vscode-button-card-js.git"
   },
-  "license": "MIT",
-  "version": "0.2.1",
   "engines": {
     "vscode": "^1.45.1"
   },
