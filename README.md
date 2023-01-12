@@ -1,65 +1,20 @@
-# vscode-home-assistant-button-card-js README
+# Button Card Javascript Syntax Highlighting in VSCode
 
-This is the README for your extension "vscode-home-assistant-button-card-js". After writing up a brief description, we recommend including the following sections.
+![release](https://img.shields.io/github/v/release/wfurphy/vscode-home-assistant-button-card-js)
+![license](https://img.shields.io/github/license/wfurphy/vscode-home-assistant-button-card-js)
 
-## Features
+This is a very niche extension for Visual Studio Code which provides syntax highlighting of Javascript code blocks in YAML which are enclosed by triple square brackets (`[[[ ... ]]]`). Used when configuring the advanced _javascript templates_ properties of [Button-Card](https://github.com/custom-cards/button-card) cards for Home Assistant Lovelace dashboards.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* Syntax highlighting provided using built-in Javascript grammar
+* "Double quoted" and block YAML strings supported
+* Works with the standard YAML language and the `home-assistant` YAML language created by the [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant) plugin.
 
-For example if there is an image subfolder under your extension project workspace:
+## Preview
 
-\!\[feature X\]\(images/feature-x.png\)
+![VSCode BC JS Example](images/vscodebcjs-example.png)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+_The preview above is using the OneDark Pro theme. This plugin only provides language grammar and will work with any theme you currently use._
 
-## Requirements
+## Installation
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+I will eventually publish this on the marketplace. Until then you need to [download the latest release](https://github.com/wfurphy/vscode-home-assistant-button-card-js/releases/latest) as a VSIX file. Then in Visual Studio Code navigate to your Extensions screen. From the three dots at the top right of the Extension browser chose "Install from VSIX...", select the file and follow the prompts. Restart Visual Studio Code. Enjoy.

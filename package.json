@@ -1,7 +1,14 @@
 {
   "name": "vscode-home-assistant-button-card-js",
-  "displayName": "Javascript Highlighting for Button-Card Templates in VSCode",
-  "description": "Syntax Highlighting for Javascript code blocks enclosed in triple square brackets [[[ * ]]]. Used by Button-Card Templates for Home Assistant Lovelace Dashboards. This is to be used as an addition to https://github.com/keesschollaart81/vscode-home-assistant as it injects into the `source.home-assistant` YAML replacement language provided by this plugin.",
+  "displayName": "Button Card Javascript Syntax Highlighting in VSCode",
+  "description": "Syntax highlighting of Javascript code blocks in YAML which are enclosed by triple square brackets (`[[[ ... ]]]`). Used when configuring the advanced _javascript templates_ properties of [Button-Card](https://github.com/custom-cards/button-card) cards for Home Assistant Lovelace dashboards.",
+  "homepage": "https://github.com/wfurphy/vscode-home-assistant-button-card-js",
+  "author": "Will Furphy (https://github.com/wfurphy)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wfurphy/vscode-home-assistant-button-card-js.git"
+  },
+  "license": "MIT",
   "version": "0.2.0",
   "engines": {
     "vscode": "^1.45.1"
@@ -12,20 +19,24 @@
   "contributes": {
     "grammars": [
       {
-        "scopeName": "js-inline.homeassistant.injection",
+        "scopeName": "js-inline.injection",
         "path": "./syntaxes/js-inline.tmLanguage.json",
         "injectTo": [
-          "source.home-assistant"
+          "source.home-assistant",
+          "text.yaml",
+          "source.yaml"
         ],
         "embeddedLanguages": {
           "meta.embedded.inline.js": "js"
         }
       },
       {
-        "scopeName": "js-block.homeassistant.injection",
+        "scopeName": "js-block.injection",
         "path": "./syntaxes/js-block.tmLanguage.json",
         "injectTo": [
-          "source.home-assistant"
+          "source.home-assistant",
+          "text.yaml",
+          "source.yaml"
         ],
         "embeddedLanguages": {
           "meta.embedded.block.js": "js"

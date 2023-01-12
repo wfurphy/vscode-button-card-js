@@ -6,4 +6,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- Initial release
+## [0.1.0]
+
+### Added
+
+- JS Triple Square Bracket Injection Grammar for `home-assistant` YAML language. To be used in combination with [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant) extension.
+
+## [0.2.0]
+
+### Added
+
+- JS Tripple Square Brackets Injection Grammar for YAML language.
