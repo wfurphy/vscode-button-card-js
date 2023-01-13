@@ -5,7 +5,7 @@
   "homepage": "https://github.com/wfurphy/vscode-button-card-js",
   "publisher": "wfurphy",
   "license": "MIT",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "Will Furphy",
     "url": "https://github.com/wfurphy"
@@ -25,7 +25,7 @@
   ],
   "icon": "images/vscode-bc-js-256.png",
   "galleryBanner": {
-    "color": "#55c1f1",
+    "color": "#272c34",
     "theme": "dark"
   },
   "bugs": {

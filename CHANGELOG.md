@@ -24,3 +24,7 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 
 - Tweak `package.json` for publishing.
 
+## [0.2.2] - 13th January 2023
+
+- Tweak `package.json` for publishing.
+

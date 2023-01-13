@@ -11,6 +11,10 @@ This is a very niche extension for Visual Studio Code which provides syntax high
 
 _I made this while I was working on [Creative Button Card Templates](https://github.com/wfurphy/creative-button-card-templates) and could not handle writing any more JS without syntax highlighting. Hopefully it gives someone else the same relief it gave me._
 
+## Installation
+
+### [Install from VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=wfurphy.vscode-button-card-js)
+
 ## Preview
 
 ![VSCode BC JS Example](https://raw.githubusercontent.com/wfurphy/vscode-button-card-js/master/images/vscodebcjs-example.png)
