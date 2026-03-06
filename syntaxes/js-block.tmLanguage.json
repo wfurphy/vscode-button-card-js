@@ -5,8 +5,8 @@
   "patterns": [
     {
       "name": "keyword.operator",
-      "begin": "\\[\\[\\[",
-      "end": "\\]\\]\\]",
+      "begin": "(?<!\\[)\\[\\[\\[(?!\\[)",
+      "end": "(?<!\\])\\]\\]\\](?!\\])",
       "captures": {
         "0": {
           "name": "constant.character.escape"
@@ -15,7 +15,7 @@
       "contentName": "meta.embedded.block.js",
       "patterns": [
         {
-          "include": "source.js#expression"
+          "include": "source.js"
         }
       ]
     }

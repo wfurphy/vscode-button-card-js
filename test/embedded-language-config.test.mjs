@@ -11,6 +11,15 @@ function loadManifest() {
 }
 
 /**
+ * Loads a TextMate grammar JSON file from the extension syntaxes directory.
+ * @param {string} fileName Grammar file name.
+ * @returns {Record<string, unknown>} Parsed grammar JSON.
+ */
+function loadGrammar(fileName) {
+  return JSON.parse(readFileSync(new URL(`../syntaxes/${fileName}`, import.meta.url), 'utf8'));
+}
+
+/**
  * Finds grammar contributions by scope name.
  * @param {Record<string, unknown>} manifest Parsed extension manifest.
  * @returns {{inline: Record<string, unknown>, block: Record<string, unknown>}} Inline and block grammar entries.
@@ -40,4 +49,31 @@ test('embedded javascript scopes are tokenized as non-string content', () => {
 
   assert.equal(inline.tokenTypes?.['meta.embedded.inline.js'], 'other');
   assert.equal(block.tokenTypes?.['meta.embedded.block.js'], 'other');
+});
+
+test('inline grammar supports quoted and plain scalar YAML scopes', () => {
+  const inlineGrammar = loadGrammar('js-inline.tmLanguage.json');
+  const selector = inlineGrammar.injectionSelector;
+
+  assert.equal(
+    selector,
+    'L:string.quoted.double, L:string.quoted.single, L:string.unquoted.plain.out, L:string.unquoted.plain.in'
+  );
+});
+
+test('grammars only match exact triple bracket delimiters', () => {
+  const inlinePattern = loadGrammar('js-inline.tmLanguage.json').patterns?.[0];
+  const blockPattern = loadGrammar('js-block.tmLanguage.json').patterns?.[0];
+
+  assert.equal(inlinePattern?.begin, '(?<!\\[)\\[\\[\\[(?!\\[)');
+  assert.equal(inlinePattern?.end, '(?<!\\])\\]\\]\\](?!\\])');
+  assert.equal(blockPattern?.begin, '(?<!\\[)\\[\\[\\[(?!\\[)');
+  assert.equal(blockPattern?.end, '(?<!\\])\\]\\]\\](?!\\])');
+});
+
+test('block grammar uses full JavaScript grammar for multiline template support', () => {
+  const blockPattern = loadGrammar('js-block.tmLanguage.json').patterns?.[0];
+  const included = blockPattern?.patterns?.[0]?.include;
+
+  assert.equal(included, 'source.js');
 });

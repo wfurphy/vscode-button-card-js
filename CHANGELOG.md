@@ -8,6 +8,9 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 
 - Treat `[[[ ... ]]]` templates as embedded JavaScript language regions in YAML injections (including token type mapping for non-string tokenization).
 - Add automated tests that verify embedded language and token type manifest configuration.
+- Expand inline YAML injection selectors to cover additional Home Assistant scalar scopes.
+- Harden triple bracket matching to ignore malformed quadruple delimiters and reduce scope bleed.
+- Use full JavaScript grammar for block injections to improve multiline parsing behavior.
 
 ## [0.1.0]
 
