@@ -3,9 +3,9 @@
 ![release](https://img.shields.io/github/v/release/wfurphy/vscode-button-card-js)
 ![license](https://img.shields.io/github/license/wfurphy/vscode-button-card-js)
 
-This is a very niche extension for Visual Studio Code which provides syntax highlighting of Javascript code blocks in YAML which are enclosed by triple square brackets (`[[[ ... ]]]`). Used when configuring the advanced _javascript templates_ properties of [Button-Card](https://github.com/custom-cards/button-card) cards for Home Assistant Lovelace dashboards.
+This is a very niche extension for Visual Studio Code which provides embedded Javascript language support for code blocks in YAML enclosed by triple square brackets (`[[[ ... ]]]`). Used when configuring the advanced _javascript templates_ properties of [Button-Card](https://github.com/custom-cards/button-card) cards for Home Assistant Lovelace dashboards.
 
-* Syntax highlighting provided using built-in Javascript grammar
+* Javascript is treated as an embedded language (not plain YAML string content)
 * "Double quoted" and block YAML strings supported
 * Works with the standard YAML language and the `home-assistant` YAML language created by the [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant) plugin.
 

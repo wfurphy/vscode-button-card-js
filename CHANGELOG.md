@@ -4,6 +4,11 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 
 ## [Unreleased]
 
+### Changed
+
+- Treat `[[[ ... ]]]` templates as embedded JavaScript language regions in YAML injections (including token type mapping for non-string tokenization).
+- Add automated tests that verify embedded language and token type manifest configuration.
+
 ## [0.1.0]
 
 ### Added
@@ -31,4 +36,3 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 ## [0.2.3] - 13th January 2023
 
 - Prepare for VSCode Marketplace
-
