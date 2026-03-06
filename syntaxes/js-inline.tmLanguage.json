@@ -5,8 +5,8 @@
   "patterns": [
     {
       "name": "keyword.operator",
-      "begin": "(?<!\\[)\\[\\[\\[(?!\\[)",
-      "end": "(?<!\\])\\]\\]\\](?!\\])",
+      "begin": "\\[{3,}",
+      "end": "\\]{3,}",
       "captures": {
         "0": {
           "name": "constant.character.escape"

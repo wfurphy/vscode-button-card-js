@@ -61,14 +61,14 @@ test('inline grammar supports quoted and plain scalar YAML scopes', () => {
   );
 });
 
-test('grammars only match exact triple bracket delimiters', () => {
+test('grammars match three or more bracket delimiters', () => {
   const inlinePattern = loadGrammar('js-inline.tmLanguage.json').patterns?.[0];
   const blockPattern = loadGrammar('js-block.tmLanguage.json').patterns?.[0];
 
-  assert.equal(inlinePattern?.begin, '(?<!\\[)\\[\\[\\[(?!\\[)');
-  assert.equal(inlinePattern?.end, '(?<!\\])\\]\\]\\](?!\\])');
-  assert.equal(blockPattern?.begin, '(?<!\\[)\\[\\[\\[(?!\\[)');
-  assert.equal(blockPattern?.end, '(?<!\\])\\]\\]\\](?!\\])');
+  assert.equal(inlinePattern?.begin, '\\[{3,}');
+  assert.equal(inlinePattern?.end, '\\]{3,}');
+  assert.equal(blockPattern?.begin, '\\[{3,}');
+  assert.equal(blockPattern?.end, '\\]{3,}');
 });
 
 test('block grammar uses full JavaScript grammar for multiline template support', () => {
