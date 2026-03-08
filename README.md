@@ -1,4 +1,4 @@
-# Button-Card Embeded Javascript Support in YAML for VSCode
+# Button-Card Javascript Support in YAML for VSCode
 
 ![release](https://img.shields.io/github/v/release/wfurphy/vscode-button-card-js)
 ![license](https://img.shields.io/github/license/wfurphy/vscode-button-card-js)
