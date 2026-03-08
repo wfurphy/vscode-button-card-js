@@ -1,12 +1,12 @@
 {
   "scopeName": "js-inline.injection",
-  "injectionSelector": "L:string.quoted.double",
+  "injectionSelector": "L:string.quoted.double, L:string.quoted.single, L:string.unquoted.plain.out, L:string.unquoted.plain.in",
   "name": "Grammar for Button-Card Javascript expressions surrounded by triple square brackets in quoted strings",
   "patterns": [
     {
       "name": "keyword.operator",
-      "begin": "\\[\\[\\[",
-      "end": "\\]\\]\\]",
+      "begin": "\\[{3,}",
+      "end": "\\]{3,}",
       "captures": {
         "0": {
           "name": "constant.character.escape"

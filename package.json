@@ -5,7 +5,7 @@
   "homepage": "https://github.com/wfurphy/vscode-button-card-js",
   "publisher": "wfurphy",
   "license": "MIT",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "author": {
     "name": "Will Furphy",
     "url": "https://github.com/wfurphy"
@@ -15,10 +15,17 @@
   ],
   "keywords": [
     "home assistant",
+    "home-assistant",
     "button-card",
+    "button card",
     "javascript",
     "triple square brackets",
-    "syntax"
+    "square brackets",
+    "yaml",
+    "syntax highlighting",
+    "code color",
+    "code coloring",
+    "language injection"
   ],
   "extensionPack": [
     "keesschollaart.vscode-home-assistant"
@@ -49,7 +56,10 @@
           "source.yaml"
         ],
         "embeddedLanguages": {
-          "meta.embedded.inline.js": "js"
+          "meta.embedded.inline.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.embedded.inline.js": "other"
         }
       },
       {
@@ -61,9 +71,15 @@
           "source.yaml"
         ],
         "embeddedLanguages": {
-          "meta.embedded.block.js": "js"
+          "meta.embedded.block.js": "javascript"
+        },
+        "tokenTypes": {
+          "meta.embedded.block.js": "other"
         }
       }
     ]
+  },
+  "scripts": {
+    "test": "node --test"
   }
 }
