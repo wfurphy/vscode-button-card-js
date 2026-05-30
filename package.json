@@ -45,6 +45,11 @@
   "engines": {
     "vscode": "^1.45.1"
   },
+  "activationEvents": [
+    "onLanguage:yaml",
+    "onLanguage:home-assistant"
+  ],
+  "main": "./src/extension.js",
   "contributes": {
     "grammars": [
       {
