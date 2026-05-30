@@ -2,6 +2,14 @@
 
 All notable changes to the `vscode-button-card-js` extension will be documented in this file. Using [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Add ESLint diagnostics for JavaScript inside Button-Card `[[[ ... ]]]` YAML templates.
+- Add configurable lint timing with `buttonCardJs.eslint.run` (`onType` or `onSave`) and `buttonCardJs.eslint.enable`.
+- Add automated coverage for template extraction, source mapping, ESLint integration, and contributed settings.
+
 ## [1.0.0] - 7th March 2026
 
 ### Changed
@@ -50,7 +58,6 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 ### Added
 
 - JS Triple Square Bracket Injection Grammar for `home-assistant` YAML language. To be used in combination with [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant) extension.
-
 
 
 

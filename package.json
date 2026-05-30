@@ -51,6 +51,29 @@
   ],
   "main": "./src/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Button Card JavaScript",
+      "properties": {
+        "buttonCardJs.eslint.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable ESLint diagnostics for JavaScript inside Button-Card triple-square-bracket YAML templates."
+        },
+        "buttonCardJs.eslint.run": {
+          "type": "string",
+          "default": "onType",
+          "enum": [
+            "onType",
+            "onSave"
+          ],
+          "enumDescriptions": [
+            "Lint Button-Card JavaScript templates while editing.",
+            "Lint Button-Card JavaScript templates when the YAML document is saved."
+          ],
+          "description": "Controls when ESLint diagnostics run for Button-Card JavaScript templates."
+        }
+      }
+    },
     "grammars": [
       {
         "scopeName": "js-inline.injection",

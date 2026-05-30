@@ -77,3 +77,12 @@ test('block grammar uses full JavaScript grammar for multiline template support'
 
   assert.equal(included, 'source.js');
 });
+
+test('extension contributes ESLint settings for embedded JavaScript diagnostics', () => {
+  const manifest = loadManifest();
+  const properties = manifest.contributes?.configuration?.properties;
+
+  assert.equal(properties?.['buttonCardJs.eslint.enable']?.default, true);
+  assert.equal(properties?.['buttonCardJs.eslint.run']?.default, 'onType');
+  assert.deepEqual(properties?.['buttonCardJs.eslint.run']?.enum, ['onType', 'onSave']);
+});
