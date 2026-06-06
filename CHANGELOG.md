@@ -2,7 +2,7 @@
 
 All notable changes to the `vscode-button-card-js` extension will be documented in this file. Using [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [2.1.0]
 
 ### Added
 
@@ -10,7 +10,7 @@ All notable changes to the `vscode-button-card-js` extension will be documented 
 - Add configurable lint timing with `buttonCardJs.eslint.run` (`onType` or `onSave`) and `buttonCardJs.eslint.enable`.
 - Add automated coverage for template extraction, source mapping, ESLint integration, and contributed settings.
 
-## [1.0.0] - 7th March 2026
+## [2.0.1] - 7th March 2026
 
 ### Changed
 

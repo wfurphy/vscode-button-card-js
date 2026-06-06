@@ -10,6 +10,7 @@ This is a very niche extension for Visual Studio Code which provides embedded Ja
 * "Double quoted" and block YAML strings supported.
 * Support for Button-Card 7.0+ [nested templates](https://custom-cards.github.io/button-card/v7.0/examples/js-templates/#nested-custombutton-card) with longer bracket sequences like `[[[[ ... ]]]]`+.
 * Works with the standard YAML language and the `home-assistant` YAML language created by the [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant) plugin.
+* Now includes ESLint support!
 
 > :raising_hand_man: _I made this while I was working on [Creative Button Card Templates](https://github.com/wfurphy/creative-button-card-templates) and could not handle writing any more JS without syntax highlighting. Hopefully it can also provide you with relief from the same, same, string game!_
 
@@ -29,21 +30,71 @@ Once installed you don't need to do anything else. Just open a YAML file that co
 
 The JavaScript in single line `"[[[ ... ]]]"` templates needs to be terminated with a closing semicolon (`;`) or else it can break the syntax highlighting in some cases.
 
-## ESLint diagnostics
+## ESLint
 
-The extension extracts JavaScript from Button-Card `[[[ ... ]]]` templates and runs ESLint against those snippets. Diagnostics are mapped back to the original YAML document so lint errors appear on the embedded JavaScript code.
+ESLint doesn't support the linting of embedded JavaScript within YAML files by default. However, the extension extracts JavaScript from Button-Card `[[[ ... ]]]` templates and runs ESLint against those snippets in the background. Feedback is mapped back to the original YAML so lint errors appear on the embedded JavaScript code inline just like you're used to.
 
-If your workspace has an ESLint flat config or legacy config that applies to JavaScript files, those rules are used. When no ESLint config is found, the extension falls back to syntax-only parsing so obvious JavaScript parse errors can still be reported.
+You will need to have [ESLint](https://eslint.org/) installed in your project or globally for the linting to work. The extension will pickup your project's ESLint configuration if available or you can use the recommended one below. Either way, I strongly recommend adding the globals to avoid false positives since the JavaScript templates have access to a lot of Home Assistant and Button-Card specific variables that ESLint would otherwise not recognize.
 
-The snippets are linted inside a lightweight async function wrapper so common Button-Card template code such as `return ...;` and `await ...` can be parsed by ESLint.
-
-### Settings
+### Recommended ESLint Configuration
 
 ```json
 {
-  "buttonCardJs.eslint.enable": true,
-  "buttonCardJs.eslint.run": "onType"
+  files: [
+    '**/*.yaml.button-card-*.js',
+    '**/*.yml.button-card-*.js'
+  ],
+  languageOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'script',
+    globals: {
+      entity: 'readonly',
+      entities: 'readonly',
+      states: 'readonly',
+      variables: 'readonly',
+      user: 'readonly',
+      hass: 'readonly',
+      config: 'readonly',
+      helpers: 'readonly',
+      console: 'readonly',
+      window: 'readonly',
+      document: 'readonly',
+      localStorage: 'readonly',
+      setTimeout: 'readonly',
+      clearTimeout: 'readonly',
+      setInterval: 'readonly',
+      clearInterval: 'readonly',
+      fetch: 'readonly',
+      cbcJS: 'readonly',
+      CBCError: 'readonly',
+      CBCWarn: 'readonly',
+    }
+  },
+  rules: {
+    'no-undef': 'error',
+    'no-unused-vars': ['warn', {
+      args: 'none',
+      varsIgnorePattern: '^_',
+      caughtErrors: 'none'
+    }],
+    'no-redeclare': 'error',
+    'no-unreachable': 'error',
+    'no-constant-condition': 'warn',
+    eqeqeq: ['warn', 'smart'],
+    curly: ['warn', 'multi-line'],
+    'no-var': 'error',
+    'prefer-const': 'warn',
+    'object-shorthand': 'warn',
+    'no-console': 'off'
+  }
 }
 ```
 
-Set `buttonCardJs.eslint.run` to `onSave` if you prefer diagnostics to update only when a YAML file is saved.
+### VSCode Settings
+
+```json
+{
+  "buttonCardJs.eslint.enable": true, // (true|false)
+  "buttonCardJs.eslint.run": "onType" // (onType|onSave)
+}
+```
