@@ -38,7 +38,7 @@ You will need to have [ESLint](https://eslint.org/) installed in your project or
 
 ### Recommended ESLint Configuration
 
-```json
+```js
 {
   files: [
     '**/*.yaml.button-card-*.js',
