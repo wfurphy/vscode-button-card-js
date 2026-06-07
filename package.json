@@ -110,9 +110,9 @@
   "scripts": {
     "test": "node --test",
     "package": "vsce package",
-    "publish:ms": "vsce publish",
-    "publish:ovsx": "ovsx publish -p $OVSX_PAT",
-    "publish:all": "vsce publish && ovsx publish -p $OVSX_PAT"
+    "publish:ms": "vsce publish \"$@\"",
+    "publish:ovsx": "source .env && ovsx publish -p $OVSX_PAT",
+    "publish:all": "vsce publish && source .env && ovsx publish -p $OVSX_PAT"
   },
   "devDependencies": {
     "eslint": "^10.4.1"
