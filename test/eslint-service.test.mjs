@@ -4,6 +4,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createRequire } from 'node:module';
+import { ESLint } from 'eslint';
 
 const require = createRequire(import.meta.url);
 const { lintButtonCardJavaScript } = require('../src/eslint-service.js');
@@ -27,7 +28,8 @@ test('lints extracted Button-Card JavaScript with workspace ESLint config', asyn
   const text = 'name: "[[[ return missingName; ]]]"\n';
   const diagnostics = await lintButtonCardJavaScript(text, {
     cwd,
-    filePath: join(cwd, 'dashboard.yaml')
+    filePath: join(cwd, 'dashboard.yaml'),
+    eslintFactory: (options) => new ESLint(options)
   });
 
   assert.equal(diagnostics.length, 1);
@@ -43,13 +45,25 @@ test('falls back to syntax diagnostics when no workspace ESLint config exists', 
   const text = 'name: "[[[ return (; ]]]"\n';
   const diagnostics = await lintButtonCardJavaScript(text, {
     cwd,
-    filePath: join(cwd, 'dashboard.yaml')
+    filePath: join(cwd, 'dashboard.yaml'),
+    eslintFactory: (options) => new ESLint(options)
   });
 
   assert.equal(diagnostics.length, 1);
   assert.equal(diagnostics[0].severity, 2);
   assert.equal(diagnostics[0].ruleId, null);
   assert.match(diagnostics[0].message, /Parsing error/u);
+});
+
+test('returns no diagnostics when ESLint is unavailable in the workspace', async () => {
+  const cwd = mkdtempSync(join(tmpdir(), 'button-card-no-eslint-'));
+  const text = 'name: "[[[ return missingName; ]]]"\n';
+  const diagnostics = await lintButtonCardJavaScript(text, {
+    cwd,
+    filePath: join(cwd, 'dashboard.yaml')
+  });
+
+  assert.deepEqual(diagnostics, []);
 });
 
 test('returns no diagnostics when a document has no Button-Card JavaScript regions', async () => {

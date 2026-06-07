@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const { createRequire } = require('module');
 const {
   createLintDocument,
   findButtonCardJavaScriptRegions,
@@ -36,21 +37,27 @@ async function lintButtonCardJavaScript(text, options = {}) {
 
   const eslint = await createWorkspaceEslint(options);
 
+  if (!eslint) {
+    return [];
+  }
+
   try {
     return await lintRegions(text, regions, eslint, options);
   } catch (error) {
-    if (!isMissingConfigError(error) || options.eslintFactory) {
+    if (!isMissingConfigError(error)) {
       throw error;
     }
 
-    return lintRegions(text, regions, await createFallbackEslint(options), options);
+    const fallbackEslint = await createFallbackEslint(options);
+
+    return fallbackEslint ? lintRegions(text, regions, fallbackEslint, options) : [];
   }
 }
 
 /**
  * Creates an ESLint instance that resolves user workspace configuration.
  * @param {{cwd?: string, eslintFactory?: Function}} options Linting options.
- * @returns {Promise<{ lintText: Function }>} ESLint-compatible linter.
+ * @returns {Promise<{ lintText: Function } | undefined>} ESLint-compatible linter.
  */
 async function createWorkspaceEslint(options) {
   if (options.eslintFactory) {
@@ -60,9 +67,13 @@ async function createWorkspaceEslint(options) {
     });
   }
 
-  const { ESLint } = require('eslint');
+  const eslintModule = resolveWorkspaceEslint(options.cwd);
 
-  return new ESLint({
+  if (!eslintModule) {
+    return undefined;
+  }
+
+  return new eslintModule.ESLint({
     cwd: options.cwd,
     ignore: false
   });
@@ -71,12 +82,10 @@ async function createWorkspaceEslint(options) {
 /**
  * Creates an ESLint instance for syntax-only fallback linting.
  * @param {{cwd?: string}} options Linting options.
- * @returns {Promise<{ lintText: Function }>} ESLint-compatible linter.
+ * @returns {Promise<{ lintText: Function } | undefined>} ESLint-compatible linter.
  */
 async function createFallbackEslint(options) {
-  const { ESLint } = require('eslint');
-
-  return new ESLint({
+  const eslintOptions = {
     cwd: options.cwd,
     ignore: false,
     overrideConfigFile: true,
@@ -89,7 +98,19 @@ async function createFallbackEslint(options) {
         }
       }
     ]
-  });
+  };
+
+  if (options.eslintFactory) {
+    return options.eslintFactory(eslintOptions);
+  }
+
+  const eslintModule = resolveWorkspaceEslint(options.cwd);
+
+  if (!eslintModule) {
+    return undefined;
+  }
+
+  return new eslintModule.ESLint(eslintOptions);
 }
 
 /**
@@ -169,12 +190,38 @@ function getDiagnosticEndOffset(region, message, prefixLineCount, fallbackOffset
 }
 
 /**
+ * Resolves ESLint from the active workspace instead of the extension bundle.
+ * @param {string | undefined} cwd Workspace directory path.
+ * @returns {{ESLint: new (options: Record<string, unknown>) => { lintText: Function }} | undefined} ESLint module.
+ */
+function resolveWorkspaceEslint(cwd) {
+  try {
+    return createRequire(path.join(cwd || process.cwd(), 'package.json'))('eslint');
+  } catch (error) {
+    if (isMissingModuleError(error)) {
+      return undefined;
+    }
+
+    throw error;
+  }
+}
+
+/**
  * Checks whether ESLint failed because no workspace config exists.
  * @param {unknown} error Error thrown by ESLint.
  * @returns {boolean} Whether the error is a missing-config failure.
  */
 function isMissingConfigError(error) {
   return error instanceof Error && /Could not find config file/i.test(error.message);
+}
+
+/**
+ * Checks whether Node failed while resolving the workspace ESLint package.
+ * @param {unknown} error Error thrown by module resolution.
+ * @returns {boolean} Whether the error is a missing-module failure.
+ */
+function isMissingModuleError(error) {
+  return error instanceof Error && error.code === 'MODULE_NOT_FOUND' && /eslint/.test(error.message);
 }
 
 module.exports = {

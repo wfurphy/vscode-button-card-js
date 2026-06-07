@@ -34,60 +34,72 @@ The JavaScript in single line `"[[[ ... ]]]"` templates needs to be terminated w
 
 ESLint doesn't support the linting of embedded JavaScript within YAML files by default. However, the extension extracts JavaScript from Button-Card `[[[ ... ]]]` templates and runs ESLint against those snippets in the background. Feedback is mapped back to the original YAML so lint errors appear on the embedded JavaScript code inline just like you're used to.
 
-You will need to have [ESLint](https://eslint.org/) installed in your project or globally for the linting to work. The extension will pickup your project's ESLint configuration if available or you can use the recommended one below. Either way, I strongly recommend adding the globals to avoid false positives since the JavaScript templates have access to a lot of Home Assistant and Button-Card specific variables that ESLint would otherwise not recognize.
+You will need to have [ESLint](https://eslint.org/) installed in your project for linting to work. Syntax highlighting and embedded JavaScript language support still work normally when ESLint is not installed.
+
+The extension will pick up your project's ESLint configuration if available. If no ESLint configuration is available, it falls back to syntax-only JavaScript parsing. I strongly recommend adding the globals below to avoid false positives since the JavaScript templates have access to Home Assistant and Button-Card specific variables that ESLint would otherwise not recognise.
 
 ### Recommended ESLint Configuration
 
+Install ESLint in the project that contains your Button-Card templates:
+
+```sh
+npm install --save-dev eslint
+```
+
+Then add an `eslint.config.mjs` file in the project root:
+
 ```js
-{
-  files: [
-    '**/*.yaml.button-card-*.js',
-    '**/*.yml.button-card-*.js'
-  ],
-  languageOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'script',
-    globals: {
-      entity: 'readonly',
-      entities: 'readonly',
-      states: 'readonly',
-      variables: 'readonly',
-      user: 'readonly',
-      hass: 'readonly',
-      config: 'readonly',
-      helpers: 'readonly',
-      console: 'readonly',
-      window: 'readonly',
-      document: 'readonly',
-      localStorage: 'readonly',
-      setTimeout: 'readonly',
-      clearTimeout: 'readonly',
-      setInterval: 'readonly',
-      clearInterval: 'readonly',
-      fetch: 'readonly',
-      cbcJS: 'readonly',
-      CBCError: 'readonly',
-      CBCWarn: 'readonly',
+export default [
+  {
+    files: [
+      '**/*.yaml.button-card-*.js',
+      '**/*.yml.button-card-*.js'
+    ],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'script',
+      globals: {
+        entity: 'readonly',
+        entities: 'readonly',
+        states: 'readonly',
+        variables: 'readonly',
+        user: 'readonly',
+        hass: 'readonly',
+        config: 'readonly',
+        helpers: 'readonly',
+        console: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        fetch: 'readonly',
+        cbcJS: 'readonly',
+        CBCError: 'readonly',
+        CBCWarn: 'readonly'
+      }
+    },
+    rules: {
+      'no-undef': 'error',
+      'no-unused-vars': ['warn', {
+        args: 'none',
+        varsIgnorePattern: '^_',
+        caughtErrors: 'none'
+      }],
+      'no-redeclare': 'error',
+      'no-unreachable': 'error',
+      'no-constant-condition': 'warn',
+      eqeqeq: ['warn', 'smart'],
+      curly: ['warn', 'multi-line'],
+      'no-var': 'error',
+      'prefer-const': 'warn',
+      'object-shorthand': 'warn',
+      'no-console': 'off'
     }
-  },
-  rules: {
-    'no-undef': 'error',
-    'no-unused-vars': ['warn', {
-      args: 'none',
-      varsIgnorePattern: '^_',
-      caughtErrors: 'none'
-    }],
-    'no-redeclare': 'error',
-    'no-unreachable': 'error',
-    'no-constant-condition': 'warn',
-    eqeqeq: ['warn', 'smart'],
-    curly: ['warn', 'multi-line'],
-    'no-var': 'error',
-    'prefer-const': 'warn',
-    'object-shorthand': 'warn',
-    'no-console': 'off'
   }
-}
+];
 ```
 
 ### VSCode Settings

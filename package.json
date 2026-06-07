@@ -110,7 +110,7 @@
   "scripts": {
     "test": "node --test"
   },
-  "dependencies": {
+  "devDependencies": {
     "eslint": "^10.4.1"
   }
 }
